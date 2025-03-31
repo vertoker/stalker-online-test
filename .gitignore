@@ -1,0 +1,11 @@
+# Builds
+[Bb]uild/
+[Bb]uilds/
+
+# Build files
+*.exe
+*.o
+
+# IDE folders
+.vscode/
+.vs/
