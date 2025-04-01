@@ -3,6 +3,8 @@
 #include <regex>
 #include <iostream>
 
+// constructors
+
 vertoker::User::User(const std::wstring& str)
 {
     const std::wregex rx(L"[а-яА-Я0-9]+");
@@ -20,9 +22,10 @@ vertoker::User::User(const std::wstring& str)
     if (!tokenIter->matched) return;
     phone = std::stoull(tokenIter->str());
 }
-
 vertoker::User::User(std::wstring surname, std::wstring name, uint64_t phone)
-    : surname{std::move(surname)}, name{std::move(name)}, phone{phone} {}
+    : surname{ std::move(surname) }, name{ std::move(name) }, phone{ phone } {}
+
+// functions
 
 std::wstring vertoker::Print_SurnameNamePhone(const User& user)
 {

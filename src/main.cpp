@@ -15,19 +15,19 @@ int main()
 {
     setlocale(LC_ALL, "");
 
-    std::wifstream ifs("./list.txt", std::wifstream::in); // wif for wchar_t
-
     std::vector<vertoker::User> users;
-    std::wstring lineBuffer;
+
+    std::wifstream ifs("./list.txt", std::wifstream::in);
     if (ifs)
     {
+        std::wstring lineBuffer;
         while (std::getline(ifs, lineBuffer))
             users.emplace_back(lineBuffer);
     }
 
     std::wcout << users[0].GetSurname() << std::endl;
 
-    int buf;
+    uint8_t buf;
     std::wcout << L"По какому параметру сортировать: ";
     std::cin >> buf;
 
