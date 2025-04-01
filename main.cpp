@@ -5,16 +5,13 @@
 
 int main()
 {
-    setlocale(LC_ALL, "Rus");
+    std::wifstream ifs("./list.txt", std::wifstream::in); // wif for wchar_t
 
-    // wif for wchar_t
-    std::wifstream ifs("./list.txt", std::wifstream::in);
-
+    std::wstring lineBuffer;
     while (ifs)
     {
-        wchar_t buffer;
-        ifs >> buffer;
-        std::cout << buffer; // wcout for wchar_t
+        while (std::getline(ifs, lineBuffer))
+            std::wcout << lineBuffer; // wcout for wchar_t
     }
 
     std::cin.ignore(); // for console app
