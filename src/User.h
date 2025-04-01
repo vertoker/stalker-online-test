@@ -26,7 +26,7 @@ namespace vertoker
     std::wstring GetNameSurnamePhone( const User& user );
     std::wstring GetPhoneSurnameName( const User& user );
 
-    typedef std::function<decltype(GetSurnameNamePhone)> UserStringPred_t; // too long to write
+    typedef std::function< decltype(GetSurnameNamePhone) > UserStringPred_t;
 
     // Predicates for sorting
 
