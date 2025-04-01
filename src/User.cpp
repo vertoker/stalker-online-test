@@ -5,7 +5,7 @@
 
 // constructors
 
-vertoker::User::User(const std::wstring& str)
+vertoker::User::User( const std::wstring& str )
 {
     const std::wregex rx(L"[а-яА-Я0-9]+");
 
@@ -22,24 +22,24 @@ vertoker::User::User(const std::wstring& str)
     if (!tokenIter->matched) return;
     phone = std::stoull(tokenIter->str());
 }
-vertoker::User::User(std::wstring surname, std::wstring name, uint64_t phone)
+vertoker::User::User( std::wstring surname, std::wstring name, uint64_t phone )
     : surname{ std::move(surname) }, name{ std::move(name) }, phone{ phone } {}
 
 // functions
 
-std::wstring vertoker::Print_SurnameNamePhone(const User& user)
+std::wstring vertoker::GetSurnameNamePhone( const User& user )
 {
     std::wstringstream ss;
     ss << user.GetSurname() << " " << user.GetName() << ": " << user.GetPhone();
     return ss.str();
 }
-std::wstring vertoker::Print_NameSurnamePhone(const User& user)
+std::wstring vertoker::GetNameSurnamePhone( const User& user )
 {
     std::wstringstream ss;
     ss << user.GetName() << " " << user.GetSurname() << ": " << user.GetPhone();
     return ss.str();
 }
-std::wstring vertoker::Print_PhoneSurnameName(const User& user)
+std::wstring vertoker::GetPhoneSurnameName( const User& user )
 {
     std::wstringstream ss;
     ss << user.GetPhone() << ": " << user.GetSurname() << " " << user.GetName();

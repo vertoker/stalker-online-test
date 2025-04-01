@@ -15,17 +15,17 @@ int main()
 {
     setlocale(LC_ALL, "");
 
-    std::vector<vertoker::User> users;
-
     std::wifstream ifs("./list.txt", std::wifstream::in);
-    if (ifs)
+    if (!ifs)
     {
-        std::wstring lineBuffer;
-        while (std::getline(ifs, lineBuffer))
-            users.emplace_back(lineBuffer);
+        std::wcout << L"Файл list.txt не найден, создайте новый (в кодировке ANSI)" << std::endl;
+        return 0;
     }
-
-    std::wcout << users[0].GetSurname() << std::endl;
+    
+    std::vector<vertoker::User> users;
+    std::wstring lineBuffer;
+    while (std::getline(ifs, lineBuffer))
+        users.emplace_back(lineBuffer);
 
     uint8_t buf;
     std::wcout << L"По какому параметру сортировать: ";
@@ -34,17 +34,17 @@ int main()
     if (buf == 1)
     {
         std::sort(users.begin(), users.end(), vertoker::nameLessPred);
-        print(users, vertoker::Print_NameSurnamePhone);
+        print(users, vertoker::GetNameSurnamePhone);
     }
     else if (buf == 2)
     {
         std::sort(users.begin(), users.end(), vertoker::surnameLessPred);
-        print(users, vertoker::Print_SurnameNamePhone);
+        print(users, vertoker::GetSurnameNamePhone);
     }
     else if (buf == 3)
     {
         std::sort(users.begin(), users.end(), vertoker::phoneLessPred);
-        print(users, vertoker::Print_PhoneSurnameName);
+        print(users, vertoker::GetPhoneSurnameName);
     }
 
     std::cin.ignore(); // for console app

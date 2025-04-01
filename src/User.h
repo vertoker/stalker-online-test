@@ -22,28 +22,25 @@ namespace vertoker
         uint64_t     phone;
     };
 
-    std::wstring Print_SurnameNamePhone( const User& user );
-    std::wstring Print_NameSurnamePhone( const User& user );
-    std::wstring Print_PhoneSurnameName( const User& user );
+    std::wstring GetSurnameNamePhone( const User& user );
+    std::wstring GetNameSurnamePhone( const User& user );
+    std::wstring GetPhoneSurnameName( const User& user );
 
-    typedef std::function<decltype(Print_SurnameNamePhone)> UserStringPred_t; // too long to write
+    typedef std::function<decltype(GetSurnameNamePhone)> UserStringPred_t; // too long to write
 
     // Predicates for sorting
 
-    struct
-    {
+    struct {
         bool operator()( User& a, User& b ) const
             { return a.GetName() < b.GetName(); }
     } nameLessPred;
 
-    struct
-    {
+    struct {
         bool operator()( User& a, User& b ) const
-            { return a.GetSurname() < b.GetName(); }
+            { return a.GetSurname() < b.GetSurname(); }
     } surnameLessPred;
 
-    struct
-    {
+    struct {
         bool operator()( User& a, User& b ) const
             { return a.GetPhone() < b.GetPhone(); }
     } phoneLessPred;
