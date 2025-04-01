@@ -1,17 +1,50 @@
+#include "User.h"
+
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <string>
+#include <algorithm>
+
+void print(const std::vector<vertoker::User>& users, vertoker::UserStringPred_t printPred)
+{
+    for (const auto& user : users)
+        std::wcout << printPred(user) << std::endl;
+}
 
 int main()
 {
+    setlocale(LC_ALL, "");
+
     std::wifstream ifs("./list.txt", std::wifstream::in); // wif for wchar_t
 
+    std::vector<vertoker::User> users;
     std::wstring lineBuffer;
-    while (ifs)
+    if (ifs)
     {
         while (std::getline(ifs, lineBuffer))
-            std::wcout << lineBuffer; // wcout for wchar_t
+            users.emplace_back(lineBuffer);
+    }
+
+    std::wcout << users[0].GetSurname() << std::endl;
+
+    int buf;
+    std::wcout << L"По какому параметру сортировать: ";
+    std::cin >> buf;
+
+    if (buf == 1)
+    {
+        std::sort(users.begin(), users.end(), vertoker::nameLessPred);
+        print(users, vertoker::Print_NameSurnamePhone);
+    }
+    else if (buf == 2)
+    {
+        std::sort(users.begin(), users.end(), vertoker::surnameLessPred);
+        print(users, vertoker::Print_SurnameNamePhone);
+    }
+    else if (buf == 3)
+    {
+        std::sort(users.begin(), users.end(), vertoker::phoneLessPred);
+        print(users, vertoker::Print_PhoneSurnameName);
     }
 
     std::cin.ignore(); // for console app
